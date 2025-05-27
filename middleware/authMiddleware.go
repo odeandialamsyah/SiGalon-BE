@@ -50,5 +50,15 @@ func RoleMiddleware(requiredRole string) fiber.Handler {
 				"error": "Unauthorized",
 			})
 		}
+
+		// Pastikan userID dikonversi ke ObjectID
+		objID, ok := userID.(primitive.ObjectID)
+		if !ok {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Invalid user ID format",
+			})
+		}
+
+		
 	}
 }
