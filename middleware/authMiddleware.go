@@ -39,3 +39,10 @@ func AuthMiddleware(c *fiber.Ctx) error {
 	c.Locals("userID", userID)
 	return c.Next()
 }
+
+// RoleMiddleware memverifikasi apakah pengguna memiliki role yang diperlukan
+func RoleMiddleware(requiredRole string) fiber.Handler {
+	return func(c *fiber.Ctx) error {
+		
+	}
+}
