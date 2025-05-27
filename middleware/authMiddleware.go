@@ -74,5 +74,11 @@ func RoleMiddleware(requiredRole string) fiber.Handler {
 			})
 		}
 
+		// Cek apakah role pengguna sesuai dengan role yang diminta
+		if user.Role.Name != requiredRole {
+			return c.Status(fiber.StatusForbidden).JSON(fiber.Map{
+				"error": "Access Denied",
+			})
+		}
 	}
 }
