@@ -43,6 +43,12 @@ func AuthMiddleware(c *fiber.Ctx) error {
 // RoleMiddleware memverifikasi apakah pengguna memiliki role yang diperlukan
 func RoleMiddleware(requiredRole string) fiber.Handler {
 	return func(c *fiber.Ctx) error {
-		
+		// Ambil userID yang disimpan di context oleh middleware Auth
+		userID := c.Locals("userID")
+		if userID == nil {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Unauthorized",
+			})
+		}
 	}
 }
