@@ -59,6 +59,20 @@ func RoleMiddleware(requiredRole string) fiber.Handler {
 			})
 		}
 
-		
+		// Ambil user dari database menggunakan ObjectID
+		userCollection := config.DB.Collection("users")
+		var user models.User
+		err := userCollection.FindOne(c.Context(), bson.M{"_id": objID}).Decode(&user)
+		if err != nil {
+			if err == mongo.ErrNoDocuments {
+				return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+					"error": "User not found",
+				})
+			}
+			return c.Status(fiber.StatusInternalServerError).JSON(fiber.Map{
+				"error": "Internal server error",
+			})
+		}
+
 	}
 }
