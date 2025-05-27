@@ -1,11 +1,15 @@
 package middleware
 
 import (
+	"sigalon-be/config"
+	"sigalon-be/models"
 	"sigalon-be/utils"
 	"strings"
 
 	"github.com/gofiber/fiber/v2"
+	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/bson/primitive"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 // AuthMiddleware memverifikasi JWT token di header Authorization
@@ -80,5 +84,8 @@ func RoleMiddleware(requiredRole string) fiber.Handler {
 				"error": "Access Denied",
 			})
 		}
+
+		// Lanjutkan ke handler berikutnya
+		return c.Next()
 	}
 }
