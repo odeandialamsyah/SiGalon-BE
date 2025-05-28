@@ -27,4 +27,13 @@ func GetUserByUsername(username string) (models.User, error) {
 		return models.User{}, err
 	}
 
+	// Get role information
+	var role models.Role
+	err = roleCollection.FindOne(context.Background(), bson.M{"_id": user.RoleID}).Decode(&role)
+	if err != nil {
+		return models.User{}, err
+	}
+
+	user.Role = role
+	return user, nil
 }
