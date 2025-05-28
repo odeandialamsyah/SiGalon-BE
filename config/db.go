@@ -9,7 +9,7 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-var DB *mongo.Client
+var DB *mongo.Database
 
 func ConnectDB() *mongo.Client {
     clientOptions := options.Client().ApplyURI("mongodb://localhost:27017")
@@ -26,7 +26,7 @@ func ConnectDB() *mongo.Client {
         log.Fatal(err)
     }
 
-    DB = client
+    DB = client.Database("sigalon")
     log.Println("Connected to MongoDB")
     return client
 }
