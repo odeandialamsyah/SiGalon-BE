@@ -56,3 +56,12 @@ func GetUserByEmail(email string) (models.User, error) {
 	user.Role = role
 	return user, nil
 }
+
+// Fungsi untuk menambahkan user baru
+func CreateUser(user models.User) error {
+	_, err := userCollection.InsertOne(context.Background(), user)
+	if err != nil {
+		return err
+	}
+	return nil
+}
