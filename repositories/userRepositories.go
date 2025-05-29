@@ -40,5 +40,11 @@ func GetUserByUsername(username string) (models.User, error) {
 
 // Fungsi untuk mendapatkan user berdasarkan email
 func GetUserByEmail(email string) (models.User, error) {
+	var user models.User
+	err := userCollection.FindOne(context.Background(), bson.M{"email": email}).Decode(&user)
+	if err != nil {
+		return models.User{}, err
+	}
+
 	
 }
