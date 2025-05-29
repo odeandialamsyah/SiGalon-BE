@@ -87,3 +87,9 @@ func UpdateUser(user models.User) error {
 	)
 	return err
 }
+
+// DeleteUser deletes a user
+func DeleteUser(id primitive.ObjectID) error {
+	_, err := userCollection.DeleteOne(context.Background(), bson.M{"_id": id})
+	return err
+}
