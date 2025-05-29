@@ -6,6 +6,7 @@ import (
 	"sigalon-be/models"
 
 	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -64,4 +65,25 @@ func CreateUser(user models.User) error {
 		return err
 	}
 	return nil
+}
+
+// UpdateUser updates a user's information
+func UpdateUser(user models.User) error {
+	update := bson.M{
+		"$set": bson.M{
+			"username": user.Username,
+			"email":    user.Email,
+		},
+	}
+
+	if !user.RoleID.IsZero() {
+		update["$set"].(bson.M)["role_id"] = user.RoleID
+	}
+
+	_, err := userCollection.UpdateOne(
+		context.Background(),
+		bson.M{"_id": user.ID},
+		update,
+	)
+	return err
 }
