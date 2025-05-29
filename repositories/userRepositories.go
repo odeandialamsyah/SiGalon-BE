@@ -37,3 +37,8 @@ func GetUserByUsername(username string) (models.User, error) {
 	user.Role = role
 	return user, nil
 }
+
+// Fungsi untuk mendapatkan user berdasarkan email
+func GetUserByEmail(email string) (models.User, error) {
+	
+}
