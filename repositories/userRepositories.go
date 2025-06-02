@@ -32,6 +32,17 @@ func GetAllUsers() ([]models.User, error) {
 	if err = cursor.All(context.Background(), &users); err != nil {
 		return nil, err
 	}
+
+	// Get role information for each user
+	for i := range users {
+		role, err := GetRoleByID(users[i].RoleID.Hex())
+		if err != nil {
+			continue
+		}
+		users[i].Role = role
+	}
+
+	return users, nil
 }
 
 
