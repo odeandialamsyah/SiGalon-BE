@@ -20,6 +20,11 @@ func InitCollections() {
 	roleCollection = config.DB.Collection("roles")
 }
 
+// GetAllUsers returns all users
+func GetAllUsers() ([]models.User, error) {
+	
+}
+
 // Fungsi untuk mendapatkan user berdasarkan username
 func GetUserByUsername(username string) (models.User, error) {
 	var user models.User
