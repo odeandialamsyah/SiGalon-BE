@@ -53,6 +53,14 @@ func GetUserByID(id primitive.ObjectID) (models.User, error) {
 		return models.User{}, err
 	}
 
+	// Get role information
+	role, err := GetRoleByID(user.RoleID.Hex())
+	if err != nil {
+		return models.User{}, err
+	}
+	user.Role = role
+
+	return user, nil
 }
 
 // Fungsi untuk mendapatkan user berdasarkan username
