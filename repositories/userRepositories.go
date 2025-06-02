@@ -45,7 +45,10 @@ func GetAllUsers() ([]models.User, error) {
 	return users, nil
 }
 
+// GetUserByID returns a user by ID
+func GetUserByID(id primitive.ObjectID) (models.User, error) {
 
+}
 
 // Fungsi untuk mendapatkan user berdasarkan username
 func GetUserByUsername(username string) (models.User, error) {
