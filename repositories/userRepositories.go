@@ -47,6 +47,11 @@ func GetAllUsers() ([]models.User, error) {
 
 // GetUserByID returns a user by ID
 func GetUserByID(id primitive.ObjectID) (models.User, error) {
+	var user models.User
+	err := userCollection.FindOne(context.Background(), bson.M{"_id": id}).Decode(&user)
+	if err != nil {
+		return models.User{}, err
+	}
 
 }
 
