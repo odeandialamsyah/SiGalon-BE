@@ -22,8 +22,19 @@ func InitCollections() {
 
 // GetAllUsers returns all users
 func GetAllUsers() ([]models.User, error) {
-	
+	var users []models.User
+	cursor, err := userCollection.Find(context.Background(), bson.M{})
+	if err != nil {
+		return nil, err
+	}
+	defer cursor.Close(context.Background())
+
+	if err = cursor.All(context.Background(), &users); err != nil {
+		return nil, err
+	}
 }
+
+
 
 // Fungsi untuk mendapatkan user berdasarkan username
 func GetUserByUsername(username string) (models.User, error) {
