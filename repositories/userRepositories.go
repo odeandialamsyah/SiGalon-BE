@@ -101,6 +101,11 @@ func GetUserByEmail(email string) (models.User, error) {
 	return user, nil
 }
 
+// Fungsi untuk mendapatkan role berdasarkan ID
+func GetRoleByID(roleID string) (models.Role, error) {
+	
+}
+
 // Fungsi untuk menambahkan user baru
 func CreateUser(user models.User) error {
 	_, err := userCollection.InsertOne(context.Background(), user)
