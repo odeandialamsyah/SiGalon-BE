@@ -103,6 +103,7 @@ func GetUserByEmail(email string) (models.User, error) {
 
 // Fungsi untuk mendapatkan role berdasarkan ID
 func GetRoleByID(roleID string) (models.Role, error) {
+	var role models.Role
 	
 }
 
