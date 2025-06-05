@@ -7,4 +7,8 @@ func LoginUser(c *fiber.Ctx) error {
 		Password string `json:"password"`
 	}
 
+	if err := c.BodyParser(&loginData); err != nil {
+		return c.Status(400).JSON(fiber.Map{"error": err.Error()})
+	}
+
 }
