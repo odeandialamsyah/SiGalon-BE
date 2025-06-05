@@ -17,5 +17,10 @@ func LoginUser(c *fiber.Ctx) error {
 		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
+	// Verifikasi password
+	if !utils.CheckPasswordHash(loginData.Password, user.Password) {
+		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
+	}
+
 
 }
