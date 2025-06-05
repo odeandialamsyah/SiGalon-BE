@@ -22,5 +22,11 @@ func LoginUser(c *fiber.Ctx) error {
 		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
 	}
 
+	// Generate JWT token
+	token, err := utils.GenerateJWT(user.ID.Hex())
+	if err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Failed to generate JWT"})
+	}
+
 
 }
