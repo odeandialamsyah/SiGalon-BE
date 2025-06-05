@@ -11,4 +11,11 @@ func LoginUser(c *fiber.Ctx) error {
 		return c.Status(400).JSON(fiber.Map{"error": err.Error()})
 	}
 
+	// Cek apakah username ada
+	user, err := repositories.GetUserByUsername(loginData.Username)
+	if err != nil {
+		return c.Status(401).JSON(fiber.Map{"error": "Invalid credentials"})
+	}
+
+
 }
