@@ -13,3 +13,7 @@ import (
 var (
 	categoryCollection *mongo.Collection
 )
+
+func InitCollections() {
+	categoryCollection = config.DB.Collection("category")
+}
